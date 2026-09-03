@@ -227,10 +227,10 @@ module tb_top;
 
 
         //----------------------------------------------------
-        // Start UVM test
+		// Start UVM test - Specify test name in run_test("") -> ram_random_test, ram_smoke_test, ram_ral_test
         //----------------------------------------------------
 
-      run_test("ram_random_test");
+      run_test();
 
     end
 
