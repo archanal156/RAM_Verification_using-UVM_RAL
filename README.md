@@ -84,30 +84,6 @@ ram_uvm_ral_verification/
 
 ---
 
-## 🏗️ Architecture
-
-```
-                                    ram_env
-   ┌──────────────────────────────────────────────────────────────────┐
-   │                                                                    │
-   │   ral_access_seq ──► ram_reg_block (RAL "RAM" uvm_mem)             │
-   │                              │  front-door read()/write()          │
-   │                              ▼                                     │
-   │                       ram_reg_adapter (reg2bus / bus2reg)           │
-   │                              │                                     │
-   │   ram_write_read_seq ─┐      ▼                                     │
-   │   ram_random_seq ─────┼──► ram_sequencer ──► ram_driver ──► ram_if │──► ram.sv (DUT)
-   │                       │                                             │
-   │                       └────────────────────────────► ram_monitor ◄──┘
-   │                                                            │
-   │                              ┌─────────────────────────────┼──────────────┐
-   │                              ▼                              ▼              ▼
-   │                     ram_scoreboard                  ram_coverage   ram_reg_predictor
-   │                    (checks vs. golden model)        (functional     (updates RAL
-   │                                                       coverage)      mirror value)
-   └──────────────────────────────────────────────────────────────────┘
-```
-
 **Connections (from `ram_env::connect_phase`):**
 - `agent.monitor.analysis_port` → `scoreboard.analysis_imp`
 - `agent.monitor.analysis_port` → `coverage.analysis_export`
